@@ -1,0 +1,112 @@
+$version: 20240009035428;
+
+@font-face {
+    font-family: 'Fontasm';
+    src: url('../fonts/fontasm.woff2?'+$version) format('woff2'),
+         url('../fonts/fontasm.woff?'+$version) format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 1rem 'Fontasm';
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    &.fa-logo::before {
+        content: '\E000';
+    }
+    &.fa-arrow-top::before {
+        content: '\E001';
+    }
+    &.fa-arrow-right::before {
+        content: '\E002';
+    }
+    &.fa-arrow-bottom::before {
+        content: '\E003';
+    }
+    &.fa-arrow-left::before {
+        content: '\E004';
+    }
+    &.fa-editor::before {
+        content: '\E005';
+    }
+    &.fa-lvl1::before {
+        content: '\31';
+    }
+    &.fa-lvl2::before {
+        content: '\32';
+    }
+    &.fa-lvl3::before {
+        content: '\33';
+    }
+    &.fa-lvl4::before {
+        content: '\34';
+    }
+    &.fa-lvl5::before {
+        content: '\35';
+    }
+    &.fa-lvl6::before {
+        content: '\36';
+    }
+    &.fa-lvl7::before {
+        content: '\37';
+    }
+    &.fa-lvl8::before {
+        content: '\38';
+    }
+    &.fa-github::before {
+        content: '\E006';
+    }
+    &.fa-settings::before {
+        content: '\E007';
+    }
+    &.fa-close::before {
+        content: '\E009';
+    }
+    &.fa-day::before {
+        content: '\E00A';
+    }
+    &.fa-night::before {
+        content: '\E00B';
+    }
+    &.fa-auto::before {
+        content: '\E00C';
+    }
+    &.fa-theme::before {
+        content: '\E00D';
+    }
+    &.fa-preferences::before {
+        content: '\E00E';
+    }
+    &.fa-tick::before {
+        content: '\E00F';
+    }
+    &.fa-circle::before {
+        content: '\E010';
+    }
+    &.fa-send::before {
+        content: '\E012';
+    }
+    &.fa-dot::before {
+        content: '\E013';
+    }
+    &.fa-edit::before {
+        content: '\E014';
+    }
+    &.fa-keyboard::before {
+        content: '\E015';
+    }
+}
+
+.active .fa {
+    &.fa-settings::before {
+        content: '\E008';
+    }
+    &.fa-circle::before {
+        content: '\E011';
+    }
+}

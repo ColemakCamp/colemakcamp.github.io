@@ -1,0 +1,105 @@
+@font-face {
+  font-family: "Fontasm";
+  src: url("../fonts/fontasm.woff2?20240009035428") format("woff2"), url("../fonts/fontasm.woff?20240009035428") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+.fa {
+  display: inline-block;
+  font: normal normal normal 1rem "Fontasm";
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.fa.fa-logo::before {
+  content: "\e000";
+}
+.fa.fa-arrow-top::before {
+  content: "\e001";
+}
+.fa.fa-arrow-right::before {
+  content: "\e002";
+}
+.fa.fa-arrow-bottom::before {
+  content: "\e003";
+}
+.fa.fa-arrow-left::before {
+  content: "\e004";
+}
+.fa.fa-editor::before {
+  content: "\e005";
+}
+.fa.fa-lvl1::before {
+  content: "1";
+}
+.fa.fa-lvl2::before {
+  content: "2";
+}
+.fa.fa-lvl3::before {
+  content: "3";
+}
+.fa.fa-lvl4::before {
+  content: "4";
+}
+.fa.fa-lvl5::before {
+  content: "5";
+}
+.fa.fa-lvl6::before {
+  content: "6";
+}
+.fa.fa-lvl7::before {
+  content: "7";
+}
+.fa.fa-lvl8::before {
+  content: "8";
+}
+.fa.fa-github::before {
+  content: "\e006";
+}
+.fa.fa-settings::before {
+  content: "\e007";
+}
+.fa.fa-close::before {
+  content: "\e009";
+}
+.fa.fa-day::before {
+  content: "\e00a";
+}
+.fa.fa-night::before {
+  content: "\e00b";
+}
+.fa.fa-auto::before {
+  content: "\e00c";
+}
+.fa.fa-theme::before {
+  content: "\e00d";
+}
+.fa.fa-preferences::before {
+  content: "\e00e";
+}
+.fa.fa-tick::before {
+  content: "\e00f";
+}
+.fa.fa-circle::before {
+  content: "\e010";
+}
+.fa.fa-send::before {
+  content: "\e012";
+}
+.fa.fa-dot::before {
+  content: "\e013";
+}
+.fa.fa-edit::before {
+  content: "\e014";
+}
+.fa.fa-keyboard::before {
+  content: "\e015";
+}
+
+.active .fa.fa-settings::before {
+  content: "\e008";
+}
+.active .fa.fa-circle::before {
+  content: "\e011";
+}/*# sourceMappingURL=fontasm.css.map */

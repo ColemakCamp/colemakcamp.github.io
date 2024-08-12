@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Colemak Camp</title>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <meta name="HandheldFriendly" content="true">
+   <meta name="description" content="A free and easy way to learn touch typing on Colemak and other keyboard layouts.">
+   <meta name="author" content="Colemak Camp">
+   <link rel="canonical" href="https://colemakcamp.github.io/">
+
+   <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="app/180.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="app/32.png">
+   <link rel="icon" type="image/png" sizes="194x194" href="app/194.png">
+   <link rel="icon" type="image/png" sizes="192x192" href="app/192.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="app/16.png">
+   <link rel="image_src" type="image/png" sizes="256x256" href="app/256.png">
+   <link rel="shortcut icon" type="image/x-icon" href="app/favicon.ico">
+   <link rel="manifest" href="app/site.webmanifest">
+   <link rel="mask-icon" href="app/safari.svg" color="#7398d9">
+   <meta name="apple-mobile-web-app-title" content="Colemak Camp">
+   <meta name="application-name" content="Colemak Camp">
+   <meta name="theme-color" content="#1c1c1c">
+   <meta name="darkreader-lock">
+
+   <link rel="stylesheet" type="text/css" href="styles/fontasm.min.css">
+   <link rel="stylesheet" type="text/css" href="styles/radiocanada.min.css">
+   <link rel="stylesheet" type="text/css" href="styles/cascadiacode.min.css">
+   <link rel="stylesheet" type="text/css" href="styles/main.min.css">
+   <style rel="stylesheet" id="nightCSS"></style>
+   <style rel="stylesheet" id="dayCSS"></style>
+
+   <meta property="og:site_name" content="Colemak Camp">
+   <meta property="og:title" content="Colemak Camp">
+   <meta property="og:type" content="website">
+   <meta property="og:url" content="https://colemakcamp.github.io/">
+   <meta property="og:image" content="https://colemakcamp.github.io/app/ograph.png?20230031164825">
+   <meta property="og:image:type" content="image/png">
+   <meta property="og:image:width" content="1200">
+   <meta property="og:image:height" content="1200">
+   <meta property="og:image:alt" content="Catadex Logo">
+   <meta property="og:description" content="A free and easy way to learn touch typing on Colemak and other keyboard layouts.">
+
+   <meta name="twitter:title" content="Colemak Camp">
+   <meta name="twitter:image" content="https://colemakcamp.github.io/app/twitter.png?20230031164825">
+   <meta name="twitter:card" content="summary_large_image">
+
+   <script type="text/javascript" src="scripts/theme-stuff-re.min.js"></script>
+</head>
+<body>
+   <curtain class="dispose" id="sub">
+      <card class="customInput">
+         <ul class="customLevels">
+            <li class="currentCustomLevel" data-level="lvl1" data-tippy-content="Custom Level 1" data-tippy-placement="bottom">
+               <span>1</span>
+               <label>Level</label>
+            </li>
+            <li data-level="lvl2" data-tippy-content="Custom Level 2" data-tippy-placement="bottom">
+               <span>2</span>
+               <label>Level</label>
+            </li>
+            <li data-level="lvl3" data-tippy-content="Custom Level 3" data-tippy-placement="bottom">
+               <span>3</span>
+               <label>Level</label>
+            </li>
+            <li data-level="lvl4" data-tippy-content="Custom Level 4" data-tippy-placement="bottom">
+               <span>4</span>
+               <label>Level</label>
+            </li>
+            <li data-level="lvl5" data-tippy-content="Custom Level 5" data-tippy-placement="bottom">
+               <span>5</span>
+               <label>Level</label>
+            </li>
+            <li data-level="lvl6" data-tippy-content="Custom Level 6" data-tippy-placement="bottom">
+               <span>6</span>
+               <label>Level</label>
+            </li>
+         </ul>
+         <div id="inputKeyboard"></div>
+         <!-- <div id="inputShiftKeyboard"></div> -->
+         <ul class="customButtons">
+            <li class="discardButton">Cancel</li>
+            <li class="saveButton">Apply</li>
+         </ul>
+         <input type="text" name="customKey" id="customUIKeyInput" autocomplete="off">
+      </card>
+      <backdrop></backdrop>
+   </curtain>
+   <content class="hidemenu">
+      <header class="contain">
+         <left>
+            <i class="fa fa-logo"></i>
+            <svg class="logo" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" x="0" y="0" version="1.1" viewBox="0 0 150 35"><g><path d="M9.1,27c-1.3,0-2.4-0.3-3.3-0.8c-0.9-0.6-1.6-1.5-2-2.9C3.2,21.9,3,20,3,17.5s0.2-4.4,0.7-5.8   c0.4-1.4,1.1-2.3,2-2.9S7.6,8,8.8,8c0.9,0,1.7,0.1,2.4,0.2c0.7,0.1,1.3,0.2,1.7,0.4v1.4H9.7c-0.7,0-1.4,0.2-1.9,0.6   c-0.6,0.4-1,1.2-1.3,2.3s-0.5,2.6-0.5,4.7c0,2,0.2,3.6,0.5,4.7c0.3,1.1,0.8,1.9,1.4,2.3c0.6,0.4,1.3,0.6,2.1,0.6h3.2v1.4   c-0.4,0.1-1,0.2-1.7,0.4C10.8,26.9,10,27,9.1,27z"/><path d="M19.6,27c-1.1,0-2.1-0.2-2.8-0.7c-0.8-0.4-1.3-1.2-1.7-2.2c-0.4-1-0.6-2.3-0.6-4c0-1.7,0.2-3,0.6-4   c0.4-1,1-1.7,1.7-2.2c0.8-0.4,1.7-0.7,2.8-0.7c1.1,0,2,0.2,2.8,0.7s1.3,1.2,1.7,2.2c0.4,1,0.6,2.3,0.6,4c0,1.7-0.2,3-0.6,4   c-0.4,1-1,1.7-1.7,2.2C21.6,26.8,20.7,27,19.6,27z M19.6,25.4c0.4,0,0.8-0.1,1.1-0.4c0.3-0.3,0.6-0.8,0.8-1.6   c0.2-0.8,0.3-1.8,0.3-3.2c0-1.4-0.1-2.5-0.3-3.2c-0.2-0.7-0.5-1.3-0.8-1.6c-0.3-0.3-0.7-0.4-1.1-0.4c-0.4,0-0.8,0.1-1.1,0.4   c-0.3,0.3-0.6,0.8-0.8,1.6s-0.3,1.8-0.3,3.2c0,1.4,0.1,2.4,0.3,3.2s0.5,1.3,0.8,1.6C18.8,25.2,19.2,25.4,19.6,25.4z"/><path d="M27.7,26.7V8.3h2.9v18.5H27.7z"/><path d="M39.3,27c-1.4,0-2.5-0.2-3.3-0.7c-0.9-0.4-1.5-1.2-1.9-2.1c-0.4-1-0.6-2.3-0.6-4c0-1.7,0.2-3.1,0.6-4   c0.4-1,0.9-1.7,1.7-2.1c0.7-0.4,1.6-0.7,2.7-0.7c1,0,1.9,0.2,2.6,0.7s1.3,1.2,1.7,2.1c0.4,1,0.6,2.3,0.6,4V21h-6.9   c0,1.6,0.3,2.7,0.8,3.3c0.5,0.6,1.4,0.9,2.6,0.9h2.8v1.2c-0.4,0.1-0.9,0.2-1.5,0.4C40.6,26.9,39.9,27,39.3,27z M36.4,19.3h4   c0-1.2-0.1-2.1-0.3-2.7c-0.2-0.6-0.4-1.1-0.7-1.3c-0.3-0.2-0.6-0.4-1-0.4s-0.7,0.1-1,0.4c-0.3,0.2-0.5,0.7-0.7,1.3   C36.5,17.2,36.4,18.1,36.4,19.3z"/><path d="M46.1,26.7V13.5h2.2l0.3,0.8h0.1c0.3-0.3,0.7-0.5,1.1-0.7c0.5-0.2,1-0.3,1.8-0.3c0.7,0,1.2,0.1,1.7,0.3   c0.5,0.2,0.9,0.4,1.2,0.8c0.4-0.4,0.9-0.6,1.5-0.8c0.6-0.2,1.2-0.3,1.9-0.3c0.7,0,1.3,0.1,1.9,0.3c0.6,0.2,1,0.6,1.4,1.2   c0.4,0.6,0.5,1.4,0.5,2.6v9.3h-2.9v-9.3c0-0.6-0.1-1.1-0.3-1.4c-0.2-0.3-0.5-0.6-0.8-0.7c-0.3-0.1-0.6-0.2-0.9-0.2   c-0.4,0-0.7,0-1,0.1c-0.3,0.1-0.5,0.2-0.7,0.3c0.1,0.2,0.1,0.5,0.2,0.8c0.1,0.4,0.1,0.7,0.1,1.1v9.3h-2.9v-9.3   c0-0.6-0.1-1.1-0.3-1.4c-0.2-0.3-0.5-0.6-0.8-0.7c-0.3-0.1-0.6-0.2-0.9-0.2c-0.3,0-0.6,0.1-0.9,0.2c-0.3,0.1-0.5,0.2-0.6,0.4v11.2   H46.1z"/><path d="M68.6,27c-0.8,0-1.4-0.1-2.1-0.3c-0.6-0.2-1.1-0.6-1.5-1.3c-0.4-0.6-0.5-1.5-0.5-2.6c0-1.1,0.2-2,0.5-2.6   s0.9-1,1.5-1.2c0.6-0.2,1.4-0.3,2.2-0.3c0.4,0,0.8,0,1.2,0.1c0.4,0.1,0.8,0.1,1.1,0.2v-1.1c0-1.1-0.3-1.8-0.8-2.2   c-0.5-0.4-1.2-0.5-2.1-0.5h-2.6v-1.2c0.4-0.1,0.9-0.3,1.5-0.4c0.6-0.1,1.1-0.2,1.7-0.2c1.1,0,2.1,0.1,2.9,0.4   c0.8,0.2,1.4,0.7,1.7,1.3c0.4,0.6,0.6,1.6,0.6,2.8v9h-2.2l-0.3-0.8h-0.1c-0.3,0.3-0.7,0.5-1.2,0.7C69.8,26.9,69.3,27,68.6,27z    M69.6,25.2c0.3,0,0.6-0.1,0.9-0.2c0.3-0.1,0.5-0.2,0.7-0.4v-4.4h-1.6c-0.4,0-0.7,0.1-1,0.2c-0.3,0.1-0.6,0.4-0.8,0.7   c-0.2,0.4-0.3,0.8-0.3,1.5c0,0.7,0.1,1.2,0.3,1.5c0.2,0.4,0.5,0.6,0.8,0.7C68.9,25.2,69.2,25.2,69.6,25.2z"/><path d="M77.6,26.7V8.3h2.9v11.1l3.4-5.8h3.2l-3.7,6.2l4.1,7h-3.2l-3.7-6.6v6.6H77.6z"/></g><g><path d="M101.5,27c-1.2,0-2.3-0.3-3.1-0.8c-0.9-0.6-1.5-1.5-2-2.9c-0.5-1.4-0.7-3.3-0.7-5.8s0.2-4.4,0.7-5.8   c0.4-1.4,1.1-2.3,1.9-2.9c0.8-0.6,1.8-0.8,3-0.8c0.8,0,1.6,0.1,2.3,0.2c0.7,0.1,1.3,0.2,1.7,0.4v1.2h-3.4c-0.7,0-1.3,0.2-1.9,0.7   c-0.6,0.4-1,1.2-1.3,2.3c-0.3,1.1-0.5,2.7-0.5,4.8c0,2.1,0.2,3.6,0.5,4.8c0.3,1.1,0.8,1.9,1.4,2.3c0.6,0.4,1.3,0.7,2.1,0.7h3.4v1.2   c-0.4,0.1-0.9,0.2-1.7,0.4C103,26.9,102.2,27,101.5,27z"/><path d="M111,27c-0.8,0-1.5-0.1-2.1-0.3c-0.6-0.2-1.1-0.6-1.4-1.3c-0.3-0.6-0.5-1.5-0.5-2.6c0-1.1,0.2-2,0.5-2.5   c0.3-0.6,0.8-1,1.4-1.2c0.6-0.2,1.3-0.3,2.1-0.3c0.4,0,0.8,0,1.3,0.1c0.5,0.1,0.9,0.1,1.3,0.2v-1.2c0-1.2-0.3-2-0.8-2.3   c-0.5-0.4-1.2-0.6-2.2-0.6h-2.6v-1.1c0.4-0.1,0.9-0.3,1.5-0.4c0.6-0.1,1.1-0.2,1.7-0.2c1.1,0,1.9,0.1,2.6,0.4   c0.7,0.2,1.2,0.7,1.6,1.3c0.4,0.6,0.5,1.6,0.5,2.8v9h-2l-0.1-0.8h-0.1c-0.3,0.3-0.7,0.6-1.2,0.8C112,26.9,111.5,27,111,27z    M111.8,25.4c0.3,0,0.7-0.1,1-0.2c0.4-0.1,0.6-0.2,0.8-0.4v-4.6h-1.8c-0.4,0-0.8,0.1-1.2,0.2c-0.4,0.1-0.6,0.4-0.9,0.8   c-0.2,0.4-0.3,0.9-0.3,1.5c0,0.7,0.1,1.2,0.3,1.6c0.2,0.4,0.5,0.6,0.9,0.8C110.9,25.3,111.3,25.4,111.8,25.4z"/><path d="M119.4,26.7V13.5h2l0.1,0.8h0.1c0.3-0.3,0.7-0.6,1.1-0.8c0.4-0.2,0.9-0.3,1.5-0.3c0.6,0,1.2,0.1,1.7,0.3   c0.5,0.2,0.9,0.5,1.3,0.9c0.4-0.4,1-0.7,1.6-0.9c0.6-0.2,1.2-0.3,1.6-0.3c0.7,0,1.3,0.1,1.9,0.3c0.6,0.2,1,0.6,1.3,1.2   c0.3,0.6,0.5,1.4,0.5,2.4v9.5h-2.4v-9.5c0-0.6-0.1-1.1-0.3-1.4c-0.2-0.3-0.5-0.6-0.8-0.7c-0.3-0.1-0.7-0.2-1-0.2   c-0.4,0-0.8,0.1-1.1,0.2c-0.4,0.1-0.7,0.2-0.8,0.4c0.1,0.2,0.1,0.4,0.2,0.8c0.1,0.3,0.1,0.7,0.1,1.1v9.5h-2.4v-9.5   c0-0.6-0.1-1.1-0.3-1.4c-0.2-0.3-0.5-0.6-0.8-0.7c-0.3-0.1-0.7-0.2-1-0.2c-0.3,0-0.7,0.1-1,0.2c-0.3,0.1-0.6,0.2-0.8,0.4v11.3   H119.4z"/><path d="M137.6,32V13.5h2l0.1,0.8h0.1c0.3-0.3,0.7-0.6,1.2-0.8c0.5-0.2,1-0.3,1.5-0.3c0.9,0,1.7,0.2,2.4,0.6   c0.6,0.4,1.1,1.1,1.5,2.1c0.3,1,0.5,2.4,0.5,4.1c0,1.8-0.2,3.1-0.5,4.1c-0.3,1-0.8,1.7-1.5,2.1c-0.6,0.4-1.4,0.6-2.4,0.6   c-0.5,0-1-0.1-1.4-0.2c-0.4-0.1-0.8-0.3-1.2-0.5V32H137.6z M141.9,25.4c0.6,0,1.1-0.1,1.5-0.4c0.4-0.3,0.7-0.8,0.9-1.6   s0.3-1.9,0.3-3.3c0-1.4-0.1-2.5-0.3-3.3c-0.2-0.8-0.5-1.3-0.9-1.6c-0.4-0.3-0.9-0.4-1.5-0.4c-0.3,0-0.7,0.1-1,0.2   c-0.4,0.1-0.6,0.2-0.8,0.4v9.5c0.2,0.1,0.5,0.2,0.8,0.4C141.2,25.3,141.5,25.4,141.9,25.4z"/></g></svg>
+         </left>
+         <right>
+            <div id="selectors">
+               <div id="layout">
+                  <btn data-tippy-content="Change Keyboard Layout" data-tippy-placement="bottom-end">
+                     <label>Layout:</label>
+                     <span></span>
+                     <i class="fa fa-arrow-bottom"></i>
+                  </btn>
+                  <list class="close hide">
+                     <ul>
+                        <gr>
+                           <li data-value="colemak">Colemak</li>
+                           <li data-value="colemakdh">Colemak-DH</li>
+                        </gr>
+                        <gr>
+                           <li data-value="tarmak">Tarmak</li>
+                           <li data-value="tarmakdh">Tarmak-DH</li>
+                        </gr>
+                        <gr>
+                           <li data-value="soul">Soul</li>
+                           <li data-value="niro">Niro</li>
+                        </gr>
+                        <gr>
+                           <li data-value="azerty">AZERTY</li>
+                           <li data-value="dvorak">Dvorak</li>
+                           <li data-value="lefthandeddvorak">Dvorak (Left)</li>
+                           <li data-value="qwerty">QWERTY</li>
+                           <li data-value="workman">Workman</li>
+                           <li data-value="canary">Canary</li>
+                        </gr>
+                        <gr>
+                           <li data-value="custom">Custom</li>
+                        </gr>
+                     </ul>
+                  </list>
+               </div>
+               <div id="keyboard">
+                  <btn data-tippy-content="Change Keyboard Type" data-tippy-placement="bottom-start">
+                     <label>Keyboard:</label>
+                     <span></span>
+                     <i class="fa fa-arrow-bottom"></i>
+                  </btn>
+                  <list class="close hide">
+                     <ul>
+                        <gr>
+                           <li data-value="ansi">ANSI</li>
+                           <li data-value="iso">ISO</li>
+                           <li data-value="ortho">Ortho</li>
+                        </gr>
+                     </ul>
+                  </list>
+               </div>
+               <div id="keymapping">
+                  <btn data-tippy-content="Toggle Keyboard Mapping" data-tippy-placement="bottom-end">
+                     <label>Mapping:</label>
+                     <span>
+                        <toggle>
+                           <i class="fa fa-keyboard"></i>
+                        </toggle>
+                     </span>
+                  </btn>
+               </div>
+            </div>
+         </right>
+      </header>
+      <sidebar>
+         <ul class="nav">
+            <li class="currentLevel lvl1" data-tippy-content="Level 1" data-tippy-placement="right-start">
+               <span>1</span>
+               <label>Level</label>
+            </li>
+            <li class="lvl2" data-tippy-content="Level 2" data-tippy-placement="right-start">
+               <span>2</span>
+               <label>Level</label>
+            </li>
+            <li class="lvl3" data-tippy-content="Level 3" data-tippy-placement="right-start">
+               <span>3</span>
+               <label>Level</label>
+            </li>
+            <li class="lvl4" data-tippy-content="Level 4" data-tippy-placement="right-start">
+               <span>4</span>
+               <label>Level</label>
+            </li>
+            <li class="lvl5" data-tippy-content="Level 5" data-tippy-placement="right-start">
+               <span>5</span>
+               <label>Level</label>
+            </li>
+            <li class="lvl6" data-tippy-content="Level 6" data-tippy-placement="right-start">
+               <span>6</span>
+               <label>Level</label>
+            </li>
+            <li class="lvl7" data-tippy-content="All Words" data-tippy-placement="right-start">
+               <span>7</span>
+               <label>All Words</label>
+            </li>
+            <li class="lvl8" data-tippy-content="Full Sentences" data-tippy-placement="right-start">
+               <span>8</span>
+               <label>Full Sentences</label>
+            </li>
+         </ul>
+         <ul class="config">
+            <li class="theme auto" data-tippy-content="Toggle Theme" data-tippy-placement="right">
+               <span class="theme-auto">
+                  <i class="fa fa-auto"></i>
+               </span>
+               <span class="theme-day">
+                  <i class="fa fa-day"></i>
+               </span>
+               <span class="theme-night">
+                  <i class="fa fa-night"></i>
+               </span>
+            </li>
+            <li class="settings" data-tippy-content="Toggle Menu" data-tippy-placement="right">
+               <i class="fa fa-settings"></i>
+            </li>
+         </ul>
+      </sidebar>
+      <menubar>
+         <mcontent>
+            <mhead>
+               <ul class="menu-nav">
+                  <li class="active" data-tippy-content="Preferences" data-tippy-placement="bottom-start"><i class="fa fa-preferences"></i></li>
+                  <li data-tippy-content="Appearance" data-tippy-placement="bottom-start"><i class="fa fa-theme"></i></li>
+                  <span class="grow"></span>
+                  <li data-tippy-content="Close Menu" data-tippy-placement="bottom-end"><i class="fa fa-close"></i></li>
+               </ul>
+            </mhead>
+            <mbody class="configure">
+               <cloak class="cloak-preferences">
+                  <ul class="preferences">
+                     <mtitle>
+                        <i class="fa fa-preferences"></i>
+                        <span>Preferences</span>
+                     </mtitle>
+                     <hr>
+                     <li class="capitalLettersAllowed">
+                        <span>Allow Capital Letters</span>
+                        <i class="fa fa-tick"></i>
+                     </li>
+                     <li class="punctuationModeButton">
+                        <span>Allow Punctuation</span>
+                        <i class="fa fa-tick"></i>
+                     </li>
+                     <li class="requireBackspaceCorrectionToggle">
+                        <span>Backspace Correction</span>
+                        <i class="fa fa-tick"></i>
+                     </li>
+                     <li class="showCheatsheetButton">
+                        <span>Show Cheatsheet</span>
+                        <i class="fa fa-tick"></i>
+                     </li>
+                     <hr>
+                     <li class="fullSentenceMode">
+                        <span>Full Sentence Mode</span>
+                        <i class="fa fa-tick"></i>
+                     </li>
+                     <li class="wordScrollingModeButton active">
+                        <span>Word Scrolling Mode</span>
+                        <i class="fa fa-tick"></i>
+                     </li>
+                     <hr>
+                     <li class="timeLimitModeButton">
+                        <span>Time Limit Mode</span>
+                        <i class="fa fa-circle"></i>
+                     </li>
+                     <li class="wordLimitModeButton active">
+                        <span>Word Limit Mode</span>
+                        <i class="fa fa-circle"></i>
+                     </li>
+                     <li class="limit">
+                        <span>Set Limit</span>
+                        <input class="timeLimitModeInput dispose" type="text" value="" autocomplete="off">
+                        <input class="wordLimitModeInput" type="text" value="" autocomplete="off">
+                        <i class="fa fa-send"></i>
+                     </li>
+                     <hr>
+                     <li class="playSoundOnClick">
+                        <span>Play Sound on Keystroke</span>
+                        <i class="fa fa-tick"></i>
+                     </li>
+                     <li class="playSoundOnError">
+                        <span>Play Sound on Errors</span>
+                        <i class="fa fa-tick"></i>
+                     </li>
+                  </ul>
+               </cloak>
+               <cloak class="cloak-appearance">
+                  <ul class="appearance">
+                     <mtitle>
+                        <i class="fa fa-theme"></i>
+                        <span>Appearance</span>
+                     </mtitle>
+                     <hr>
+                     <li data-accent="default">
+                        <i class="fa fa-dot"></i>
+                        <i class="fa fa-dot"></i>
+                        <i class="fa fa-dot"></i>
+                        <span class="grow"></span>
+                        <i class="fa fa-day"></i>
+                        <i class="fa fa-night"></i>
+                     </li>
+                     <li data-accent="github">
+                        <i class="fa fa-dot"></i>
+                        <i class="fa fa-dot"></i>
+                        <i class="fa fa-dot"></i>
+                        <span class="grow"></span>
+                        <i class="fa fa-day"></i>
+                        <i class="fa fa-night"></i>
+                     </li>
+                     <li data-accent="duckduckgo">
+                        <i class="fa fa-dot"></i>
+                        <i class="fa fa-dot"></i>
+                        <i class="fa fa-dot"></i>
+                        <span class="grow"></span>
+                        <i class="fa fa-day"></i>
+                        <i class="fa fa-night"></i>
+                     </li>
+                     <li data-accent="bravesearch">
+                        <i class="fa fa-dot"></i>
+                        <i class="fa fa-dot"></i>
+                        <i class="fa fa-dot"></i>
+                        <span class="grow"></span>
+                        <i class="fa fa-day"></i>
+                        <i class="fa fa-night"></i>
+                     </li>
+                     <hr>
+                     <li data-theme="default">
+                        <span>Google Fonts</span>
+                        <i class="fa fa-day"></i>
+                        <i class="fa fa-night"></i>
+                     </li>
+                     <li data-theme="github">
+                        <span>Github</span>
+                        <i class="fa fa-day"></i>
+                        <i class="fa fa-night"></i>
+                     </li>
+                     <li data-theme="duckduckgo">
+                        <span>DuckDuckGo</span>
+                        <i class="fa fa-day"></i>
+                        <i class="fa fa-night"></i>
+                     </li>
+                     <li data-theme="bravesearch">
+                        <span>Brave Search</span>
+                        <i class="fa fa-day"></i>
+                        <i class="fa fa-night"></i>
+                     </li>
+                     <hr>
+                     <li data-theme="custom">
+                        <span>Custom</span>
+                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-day"></i>
+                        <i class="fa fa-night"></i>
+                     </li>
+                  </ul>
+               </cloak>
+            </mbody>
+         </mcontent>
+      </menubar>
+      <main class="contain">
+         <section id="main">
+            <div class="typingArea">
+               <div class="fade" id="fadeElement">
+                  <h2 class="dispose prompt"></h2>
+               </div>
+               <button id="resetButton" class="dispose">Reset</button>
+               <span id="fakeInput" data-hits='0'></span>
+               <input id="userInput" type="text" spellcheck="false" autocomplete="off">
+               <div id="scoreAndClock">
+                  <span id="scoreText">0/50</span>
+                  <span id="timeText">00:00</span>
+               </div>
+               <div id="testResults" class="transparent">
+                  <div id="accuracyText"></div>
+                  <div id="wpmText"></div>
+               </div>
+            </div>
+            <div class="cheatsheetContainer">
+               <div class="cheatsheet"></div>
+               <div class="openUIButton">
+                  <i class="fa fa-editor"></i>
+               </div>
+            </div>
+         </section>
+      </main>
+      <footer class="contain">
+         <about>
+            <a href="https://github.com/ColemakCamp">
+               <i class="fa fa-logo"></i>
+               <span>Colemak Camp</span>
+            </a>
+            <vr>|</vr>
+            <a href="https://www.gnu.org/licenses/agpl-3.0-standalone.html" target="_blank">AGPL-3.0</a>
+         </about>
+         <github>
+            <i class="fa fa-github"></i>
+            <a href="https://github.com/ColemakCamp/colemakcamp.github.io" target="_blank">Fork on Github</a>
+         </github>
+      </footer>
+   </content>
+   <script type="text/javascript" src="lib/popper.min.js"></script>
+   <script type="text/javascript" src="lib/tippy.min.js"></script>
+   <script type="text/javascript" src="scripts/libconfig.min.js"></script>
+   <script type="text/javascript" src="scripts/layout-info.min.js"></script>
+   <script type="text/javascript" src="scripts/word-list.min.js"></script>
+   <script type="text/javascript" src="scripts/keyboard-divs.min.js"></script>
+   <script type="text/javascript" src="scripts/app.min.js"></script>
+   <script type="text/javascript" src="scripts/camp-calls.min.js"></script>
+   <script type="text/javascript" src="scripts/fake-input.min.js"></script>
+</body>
+</html>
