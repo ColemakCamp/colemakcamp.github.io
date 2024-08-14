@@ -14,10 +14,11 @@ The following features are new in Colemak Camp:
 - Custom input keyboard changes according to selected keyboard type.
 - Overall change in the design language.
 - Persistent custom layout via local storage.
+- Support for phones and tablets running Android (and iOS hopefully).
 
 ### Planned Features
-- Custom themes
-- Sharing and loading custom via links
+- Custom themes.
+- Sharing and loading custom themes via links.
 
 ## License
 This project is under the **[GNU Affero General Public License v3.0 (AGPL-3.0)](https://www.gnu.org/licenses/agpl-3.0.en.html)**, which is the same as Colemak Club and Colemak Academy, as seen in this [issue](https://github.com/Nemcorp/layoutacademy/issues/2).
