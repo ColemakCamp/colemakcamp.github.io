@@ -35,7 +35,7 @@ let promptOffset = 0,
     wordMax = localStorage.getItem('wordMax') || 50, // word limit for continuous typing
     seconds = 0, // tracks the number of seconds%minutes*60 the current test has been running for 
     minutes = 0, // tracks the number of minutes the current test has been running for
-    gameOn = false, // set to true when user starts typing in input field
+    gameON = false, // set to true when user starts typing in input field
     correct = 0, // number of correct keystrokes during a game
     errors = 0, // number of typing errors during a game
     currentLevel = localStorage.getItem('currentLevel') || 1, // int representation of the current level, which determines which letter set to test
@@ -217,7 +217,7 @@ function init() {
 
 // makes the clock tic
 setInterval(()=> {
-    if(gameOn) {
+    if(gameON) {
         if(!timeLimitMode){
             seconds++;
             if(seconds >= 60) {
@@ -241,7 +241,7 @@ setInterval(()=> {
 
 // starts the timer when there is any change to the input field
 input.addEventListener('keydown', (e)=> {
-    gameOn = true;
+    gameON = true;
 });
 
 
@@ -407,7 +407,7 @@ timeLimitModeInput.addEventListener('change', ()=> {
     minutes = Math.floor(wholeSecond / 60);
 
 
-    gameOn = false;
+    gameON = false;
     resetTimeText();
 });
 
@@ -1140,251 +1140,6 @@ function clearSelectedInput() {
     }
 }
 
-// input key listener
-input.addEventListener('keydown', (e)=> {
-    if (e.key == "Unidentified") {return;}
-
-    // removes first line on the first letter of the first word of a new line
-    if(deleteLatestWord) {
-        prompt.classList.remove('smoothScroll');
-        // delete last line fromt prompt and set the offset back to 0
-        prompt.firstChild.removeChild(prompt.firstChild.firstChild);
-        if(prompt.firstChild.children.length == 0){
-            prompt.removeChild(prompt.firstChild);
-        }
-        promptOffset = 0;
-        prompt.style.left = '-' + promptOffset+ 'px';
-        deleteLatestWord = false;
-    }
-
-
-    /*___________________________________________________*/
-    /*____________________key mapping____________________*/
-
-    // get rid of default key press. We'll handle it ourselves
-    // e.preventDefault();
-    // this is no longer required if we push the correct characters to the fake input
-
-    // this is the actual character typed by the user
-    let char = e.code;
-
-    // prevent default char from being typed and replace new char from keyboard map
-    if (localStorage.getItem('keyRemapping') === 'true') {
-        if(char in keyboardMap && gameOn) {
-            if(!e.shiftKey) {
-                // input.value += keyboardMap[char];
-                fakeInput.innerText += keyboardMap[char];
-            }else {
-            // if shift key is pressed, get final input from
-            // keymap shift layer. If shiftlayer doesn't exist
-            // use a simple toUpperCase
-                if (keyboardMap.shiftLayer == 'default') {
-                    // input.value += keyboardMap[char].toUpperCase();
-                    fakeInput.innerText += keyboardMap[char].toUpperCase();
-                } else {
-                    // get char from shiftLayer
-                    // input.value += keyboardMap.shiftLayer[char];
-                    fakeInput.innerText += keyboardMap.shiftLayer[char];
-                }
-            }
-        }
-    } else {
-        //console.log(e.keyCode);
-        //console.log(specialKeyCodes.includes(e.keyCode));
-        // there is a bug on firefox that occassionally reads e.key as process, hence the boolean expression below
-        // if(!specialKeyCodes.includes(e.keyCode) && e.key != 'Process') {
-        if (!specialKeys.includes(e.key) && e.key != 'Process') {
-            //console.log('Key: ' +e.key);
-            //console.log('Code: ' +e.code);
-            if(e.key != 'Process'){
-                // input.value += e.key;
-                fakeInput.innerText += e.key;
-            }else {
-                letterIndex--;
-            }
-        }
-    }
-
-    /*____________________key mapping____________________*/
-    /*___________________________________________________*/
-
-
-    /*________________________________________________________________________________________*/
-    /*____________________listener for space and enter keys and reset keys____________________*/
-    // listens for the enter  and space key. Checks to see if input contains the
-    // correct word. If yes, generate new word. If no, give user
-    // negative feedback
-
-    if (/*e.keyCode === 13*/ e.key === "Enter" ||
-        /*e.keyCode === 32*/ e.key === " ") {
-        if (checkAnswer() && gameOn) {
-
-            // stops a ' ' character from being put in the input bar
-            // it wouldn't appear until after this function, and would
-            // still be there when the user goes to type the next word
-            e.preventDefault();
-
-            handleCorrectWord();
-
-            // update scoreText
-            updateScoreText();
-
-            // end game if score == scoreMax
-            if(score >= scoreMax){
-                endGame();
-            }
-
-            // clear input field
-            // document.querySelector('#userInput').value = '';
-            input.value = '';
-            fakeInput.innerText = '';
-
-            // set letter index (where in the word the user currently is)
-            // to the beginning of the word
-            letterIndex = 0;
-        
-        } else {
-            console.log('error space');
-            input.value += ' ';
-            fakeInput.innerText += ' '; // used a non-breaking space due to flexbox
-            letterIndex++;
-        }
-    }// end keyEvent if statement
-
-    if (/*e.keyCode === 9 */ e.key === "Tab" ||
-        /*e.keyCode === 27*/ e.key === "Escape") {
-        // 9 = Tab, 27 = Esc
-        e.preventDefault();
-        reset();
-    } else if (/*e.keyCode === 116*/ e.key === "F5") {
-        // F5 does not reload page because of the input area without this if-else
-        window.location.reload(true);
-    }// end of reset key check
-
-    /*____________________listener for space and enter keys and reset keys____________________*/
-    /*________________________________________________________________________________________*/
-
-
-
-    /*_________________________________________________________*/
-    /*____________________accuracy checking____________________*/
-
-    // if we have a backspace, decrement letter index and role back the input value
-    if (/*e.keyCode == 8*/ e.key === "Backspace") {
-        //console.log('backspace');
-        if (!e.ctrlKey) {
-            // input.value = input.value.substr(0,input.value.length-1);
-            fakeInput.innerText = fakeInput.innerText.slice(0, -1);
-            letterIndex--;
-        }
-        // letter index cannot be < 0
-        if (letterIndex < 0) {
-            letterIndex = 0;
-        }
-    }
-
-    // if key produces a character, (ie not shift, backspace, or another 
-    // utility key) increment letter index
-    // if (!specialKeyCodes.includes(e.keyCode)) {
-    if (!specialKeys.includes(e.key)) {
-        letterIndex++;
-    }
-
-    // check if answer is correct and apply the correct styling. 
-    // Also increment 'errors' or 'correct'
-    if(checkAnswerToIndex()) {
-        // input.style.color = 'var(--text-color)';//'black';
-        fakeInput.classList.remove('red');
-        // no points awarded for backspace
-        if (/*e.keyCode == 8*/ e.key === "Backspace") {
-            playClickSound();
-            // if backspace, color it grey again
-            if (e.ctrlKey) {
-                for (let i = 0; i < letterIndex; i++) {
-                    if (prompt.children[0].children[wordIndex].children[i]) {
-                        prompt.children[0].children[wordIndex].children[i].style.color = 'var(--grey)';//'gray';
-                    }
-                }
-                input.value = '';
-                fakeInput.innerText = '';
-                letterIndex = 0;
-            } else {
-                if (prompt.children[0].children[wordIndex].children[letterIndex]) {
-                    prompt.children[0].children[wordIndex].children[letterIndex].style.color = 'var(--grey)';//'gray';
-                }
-            }
-        // } else if (!specialKeyCodes.includes(e.keyCode) ||
-        } else if (!specialKeys.includes(e.key) ||
-                   /*e.keyCode == 32*/ e.key === " ") {
-            playClickSound();
-            correct++;
-            // if letter (in the prompt) exists, color it green
-            if(prompt.children[0].children[wordIndex].children[letterIndex-1]) {
-                prompt.children[0].children[wordIndex].children[letterIndex-1].style.color = 'var(--green)';//'green';
-            }
-        }
-    }else {
-        console.log('error');
-        // input.style.color = 'var(--red)';//'red';
-        fakeInput.classList.add('red');
-        // no points awarded for backspace
-        if (/*e.keyCode == 8*/ e.key === "Backspace") {
-            playClickSound();
-            // if backspace, color it grey again
-            if (e.ctrlKey) {
-                for (let i = 0; i < letterIndex; i++) {
-                    if (prompt.children[0].children[wordIndex].children[i]) {
-                        prompt.children[0].children[wordIndex].children[i].style.color = 'var(--grey)';//'gray';
-                    }
-                }
-                input.value = '';
-                fakeInput.innerText = '';
-                letterIndex = 0;
-            } else {
-                if (prompt.children[0].children[wordIndex].children[letterIndex]) {
-                    prompt.children[0].children[wordIndex].children[letterIndex].style.color = 'var(--grey)';//'gray';
-                }
-            }
-        // } else if (!specialKeyCodes.includes(e.keyCode) ||
-        } else if (!specialKeys.includes(e.key) ||
-                   /*e.keyCode == 32*/ e.key === " ") {
-            playErrorSound();
-            errors++;
-            if (prompt.children[0].children[wordIndex].children[letterIndex-1]) {
-                prompt.children[0].children[wordIndex].children[letterIndex-1].style.color = 'var(--red)';//'red';
-            }
-        }
-
-        if(!requireBackspaceCorrection && !checkAnswerToIndex()){
-            //ignore input if the wrong char was typed (negate need to backspace errors - akin to KeyBr.com's behaviour)
-            letterIndex--;
-            // input.value = input.value.substr(0,input.value.length-1);
-            fakeInput.innerText = fakeInput.innerText.slice(0, -1);
-
-            // letter index cannot be < 0
-            if (letterIndex < 0) {
-                letterIndex = 0;
-            }
-        }    
-    }
-
-    // if on the last word, check every letter so we don't need a space to end the game
-    if(!timeLimitMode && score == scoreMax-1 && checkAnswer() && gameOn) {
-        console.log('game over');
-        endGame();
-    }
-
-    //console.log('errors: ' + errors + ' \n correct: ' + correct);
-    //console.log('accuracy: ' + correct/(errors+correct));
-
-    /*____________________accuracy checking____________________*/
-    /*_________________________________________________________*/
-
-
-
-}); // end input key listner
-
-
 // returns true if the letters typed SO FAR are correct
 function checkAnswerToIndex() {
     // user input
@@ -1404,13 +1159,12 @@ for (let x = 0; x < buttons.length; x++) {
     });
 }
 
-
 // switches to level 
 function switchLevel(lev) {
     localStorage.setItem('currentLevel', lev);
     console.log(lev);
         // stop timer
-        gameOn = false;
+        gameON = false;
 
         // clear input field
         document.querySelector('#userInput').value = '';
@@ -1523,7 +1277,7 @@ function reset() {
 
 
     // stop the timer
-    gameOn = false;
+    gameON = false;
 
 
     console.log('reset called');
@@ -1640,7 +1394,7 @@ function endGame() {
     resetButton.classList.remove('dispose');
 
     // pause timer
-    gameOn = false;
+    gameON = false;
 
     // calculate wpm
     let wpm;
