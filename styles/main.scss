@@ -12,12 +12,6 @@ $uifont: 'Radio Canada', sans-serif;
 $monofont: 'Cascadia Code', monospace;
 $globalshadow: 0 0 .9rem .4rem var(--nav-shadow);
 
-// @mixin resKeys($maxwidth, $ksize) {
-//     @container (width < #{$maxwidth}) {
-//         --_rem: #{$ksize};
-//     }
-// }
-
 @mixin resFontPort($width, $size) {
     @media screen and (max-width: $width)
     and (orientation : portrait) {
@@ -252,6 +246,9 @@ header {
         .logo {
             height: 3.5rem;
             width: auto;
+            @media screen and (max-width: 640px) {
+                display: none;
+            }
         }
         .fa-logo {
             font-size: 3.25rem;
@@ -993,11 +990,10 @@ select {
         margin: 0 0 calc(3 * var(--_rem)) 0;
         letter-spacing: $localborder;
         transition-duration: 0s;
+        left: 0px;
+        top: 0px;
         &.smoothScroll {
-            transition: left $globalduration linear;
-        }
-        .line {
-            white-space: nowrap;
+            transition: left $globalduration linear, top $globalduration linear;
         }
         &.paragraph {
             word-wrap: break-word;
@@ -1005,8 +1001,20 @@ select {
             display: flex;
             flex-direction: column;
             align-items: center;
+            height: calc(6 * var(--_lines) * var(--_rem));
             .line {
                 display: block;
+                &.new {
+                    opacity: 0;
+                }
+            }
+        }
+        .line {
+            white-space: nowrap;
+            transition: opacity $globalduration linear;
+            opacity: 1;
+            &.done {
+                opacity: 0;
             }
         }
     }
@@ -1026,6 +1034,14 @@ select {
         align-items: center;
         justify-content: center;
         flex: .8 1 7vh;
+    }
+    span {
+        &.grey {
+            color: var(--grey);
+        }
+        &.red {
+            color: var(--red);
+        }
     }
 }
 

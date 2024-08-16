@@ -29,6 +29,7 @@ let prompt = document.querySelector('.prompt'),
 
 // containers and maths
 let promptOffset = 0,
+    promptLines = 3,
     score, // tracks the current number of correct words the user has typed
     scoreMax = localStorage.getItem('scoreMax') || 50, // total number of words the user must type
     timeMax = localStorage.getItem('timeMax') || 60, // time limit for continuous typing
@@ -240,18 +241,13 @@ setInterval(()=> {
 }, 1000);
 
 // starts the timer when there is any change to the input field
-input.addEventListener('keydown', (e)=> {
+input.addEventListener('input', function() { // changed to 'input' from 'keydown'
     gameON = true;
 });
 
 
 /*___________________________________________________________*/
 /*____________________preference menu________________________*/
-
-/* function openMenu() {
-    preferenceMenu.style.right = 0;
-    localStorage.setItem('preferenceMenu', 'open');
-} */
 
 function openMenu() {
     let content = document.querySelector('content'),
@@ -264,11 +260,6 @@ function openMenu() {
         content.classList.remove('hidemenu');
     }, 10);
 }
-
-/* function closeMenu() {
-    preferenceMenu.style.right = '-37vh';
-    localStorage.removeItem('preferenceMenu');
-} */
 
 function closeMenu() {
     let content = document.querySelector('content'),
@@ -307,12 +298,6 @@ document.addEventListener('keydown', (e)=> {
             clearSelectedInput();
             init();
         }
-        /* if(customInput.style.transform != 'scaleX(0)'){
-            customInput.style.transform = 'scaleX(0)';
-            // remove active class from current key
-            clearSelectedInput();
-            init();
-        } */
     }
 });
 
@@ -321,11 +306,6 @@ preferenceButton.addEventListener('click', ()=> {
     //openMenu();
     toggleMenu();
 });
-
-// listener for preference menu close button
-/* closePreferenceButton.addEventListener('click', ()=> {
-    closeMenu();
-}); */
 
 // capital letters allowed
 capitalLettersAllowed.addEventListener('click', ()=> {
@@ -1288,7 +1268,7 @@ function reset() {
 
     // prompt offset back to 0
     promptOffset = 0;
-    prompt.style.left = 0;
+    prompt.style.left = ''; //0;
 
     // set correct and errors counts to 0
     correct = 0;
@@ -1323,10 +1303,13 @@ function reset() {
     //set prompt to visible
     prompt.classList.remove('dispose');
 
-
-    for(let i = 1; i <=3 ; i++){
+    for (let i = 1; i <= promptLines + 1; i++){ // Control how many lines of prompt here
         addLineToPrompt();
-        if(i == 1) {
+        if (i !== promptLines + 1) {
+            prompt.children[i-1].classList.remove('new');
+        }
+        prompt.setAttribute('style',`--_lines: ${promptLines}`);
+        if (i == 1) {
             correctAnswer = answerWordArray[0];
         }
     }
@@ -1342,8 +1325,8 @@ function reset() {
 }
 
 // generates a new line, adds it to prompt, and to answerWordArray
-function addLineToPrompt(){
-    let lineToAdd = generateLine(scoreMax-score-answerWordArray.length-1);
+function addLineToPrompt() {
+    let lineToAdd = generateLine(scoreMax-score-answerWordArray.length - 1);
     answerString += lineToAdd;
     prompt.innerHTML += convertLineToHTML(lineToAdd);
     answerWordArray = answerWordArray.concat(lineToAdd.split(' '));
@@ -1354,7 +1337,7 @@ function addLineToPrompt(){
 function convertLineToHTML(letters) {
     let promptString = '';
 
-    promptString = `<span class='line'><span class='word' id='id${idCount}'>`;
+    promptString = `<span class='line new'><span class='word' id='id${idCount}'>`;
     // loop through all letters in prompt
     for(i = 0; i <= letters.length; i++) {
         //console.log(letters[i]);
@@ -1382,8 +1365,7 @@ function checkAnswer() {
     // let inputVal = input.value;
 
     let inputVal = fakeInput.innerText;
-
-    return inputVal == correctAnswer;
+    return inputVal === correctAnswer;
 }
 
 function endGame() {
@@ -1594,11 +1576,11 @@ function handleCorrectWord() {
     // input.style.color = 'var(--text-color)';//'black';
     fakeInput.classList.remove('red');
 
-    //remove the first word from the answer string
+    // remove the first word from the answer string
     answerWordArray.shift();
 
-    if(prompt.children[0].children.length-1 == 0 || wordIndex >= prompt.children[0].children.length-1){
-        console.log('new line ' + prompt);
+    if (prompt.querySelector('.line:not(.done)').children.length - 1 == 0 || wordIndex >= prompt.querySelector('.line:not(.done)').children.length - 1) {
+        console.log('new line');
         lineIndex++;
         
         // when we reach the end of a line, generate a new one IF 
@@ -1607,10 +1589,23 @@ function handleCorrectWord() {
 
         addLineToPrompt();
 
-        //make the first line of the prompt transparent
-        if(!wordScrollingMode){
-            prompt.removeChild(prompt.children[0]);
+        // make the first line of the prompt transparent
+        if (!wordScrollingMode) {
+            prompt.classList.add('smoothScroll');
+
+            prompt.querySelector('.line:not(.done)').classList.add('done');
+
             wordIndex = -1;
+
+            prompt.style.top = '-' + prompt.querySelector('.line.done').offsetHeight + 'px';
+
+            prompt.querySelector('.line.new').classList.remove('new');
+
+            setTimeout(function() {
+                prompt.classList.remove('smoothScroll');
+                prompt.style.top = '';
+                prompt.removeChild(prompt.querySelector('.line.done'));
+            }, 100);
         }
     }
 
@@ -1621,11 +1616,11 @@ function handleCorrectWord() {
         // update display
         prompt.classList.add('smoothScroll');
         // set the offset value of the next word
-        promptOffset += prompt.children[0].children[0].offsetWidth;
+        promptOffset += prompt.querySelector('.line:not(.done)').children[0].offsetWidth;
         // move prompt left
-        prompt.style.left = '-' + promptOffset+ 'px';        
+        prompt.style.left = '-' + promptOffset + 'px';
         // make already typed words transparent
-        prompt.children[0].firstChild.style.opacity = 0;
+        prompt.querySelector('.line:not(.done)').firstChild.style.opacity = 0;
     } else {
         // if in paragraph mode, increase word index
         wordIndex++;
@@ -1691,9 +1686,3 @@ function createTestSets(){
         // if(i == 6) console.log('level ' +(i+1) + ': ' + wordLists[objKeys[i]]);
     }
 }
-
-// fixes a small bug in mozilla
-document.addEventListener('keyup', (e)=> {
-    e.preventDefault();
-    //console.log('prevented');
-});

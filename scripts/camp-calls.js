@@ -107,6 +107,7 @@ document.addEventListener('mouseover', function(event) {
     }
 });
 
+// Moving around in the menu
 document.addEventListener('click', function(event) {
     let target = event.target,
         faPref = document.querySelector('.menu-nav .fa-preferences'),
@@ -131,7 +132,7 @@ document.addEventListener('click', function(event) {
     }
 });
 
-
+// Setting word or time limit
 document.addEventListener('click', function(event) {
     let target = event.target,
         limitLi = document.querySelector('li.limit');
@@ -154,6 +155,12 @@ document.addEventListener('click', function(event) {
             localStorage.setItem('keyRemapping', true);
             keymapping.setAttribute('data-value','on');
         }
+        // Clear input field when toggled
+        // Disabling and enabling the observer ensures that no click sound is made
+        fakeObserver.disconnect();
+        input.value = '';
+        fakeInput.innerText = '';
+        fakeObserver.observe(fakeInput, {childList: true});
     }
 });
 
