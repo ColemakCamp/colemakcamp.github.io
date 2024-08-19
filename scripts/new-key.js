@@ -184,7 +184,7 @@ function processUnknown(key) {
                 shift = keysList[key[x]][1];
 
             // Process mapping if required, otherwise simply use the same character
-            if (localStorage.getItem('keyRemapping') === 'true' && char in keyboardMap && gameON) {
+            if (localStorage.getItem('keyRemapping') === 'true' && char in keyboardMap) {
                 print += processMapping(shift, char);
             } else {
                 print += key[x];
