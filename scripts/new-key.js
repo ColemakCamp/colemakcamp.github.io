@@ -33,7 +33,7 @@ input.addEventListener('keydown', function(e) {
 
         // Regular keydown effect + keymapping
         let char = e.code;
-        if (localStorage.getItem('keyRemapping') === 'true' && char in keyboardMap && gameON) {
+        if (localStorage.getItem('keyRemapping') === 'true' && char in keyboardMap) {
             if (!e.shiftKey) {
                 fakeInput.innerText += processMapping(false, char);
             } else {
