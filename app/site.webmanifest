@@ -1,6 +1,7 @@
 {
-    "name": "Colmak Camp",
-    "short_name": "ColmakCamp",
+    "name": "Colemak Camp",
+    "short_name": "ColemakCamp",
+    "description": "A free and easy way to learn touch typing on Colemak and other keyboard layouts.",
     "icons": [
         {
             "src": "app/192.png",
